@@ -10,7 +10,7 @@ const HeaderCartButton = props => {
 
   const { items } = cartCtx;
 
-  const numberOfCartItems = cartCtx.items.reduce((curNumber, item) => {
+  const numberOfCartItems = items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);
 
@@ -23,6 +23,14 @@ const HeaderCartButton = props => {
       return;
     }
     setBtnIsHighLighted(true);
+
+    const timer = setTimeout(() => {
+      setBtnIsHighLighted(false);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [items]);
 
   return (
